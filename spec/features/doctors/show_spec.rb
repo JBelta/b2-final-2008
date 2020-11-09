@@ -4,7 +4,7 @@ describe "As a visitor" do
   describe "When I visit a doctors show page" do
     before :each do
       @hospital = Hospital.create!(name:"Grey Sloan Memorial Hospital")
-      @doctor = @hospitals.doctors.create!(name:"Meredith Grey", speciality:"General Surgery", university: "Harvard University" )
+      @doctor = @hospital.doctors.create!(name:"Meredith Grey", speciality:"General Surgery", university: "Harvard University" )
     end
     it "I see all of that doctors information including name, speciality, university as well as their hospital and list of patients" do
       visit "/doctors/#{@doctor.id}"
