@@ -5,6 +5,8 @@ describe "As a visitor" do
     before :each do
       @hospital = Hospital.create!(name:"Grey Sloan Memorial Hospital")
       @doctor = @hospital.doctors.create!(name:"Meredith Grey", speciality:"General Surgery", university: "Harvard University" )
+      @patient_1 = @doctor.patients.create!(name:"Katie Bryce", age:24 )
+      @patient_2 = @doctor.patients.create!(name:"Denny Duquette", age:39 )
     end
     it "I see all of that doctors information including name, speciality, university as well as their hospital and list of patients" do
       visit "/doctors/#{@doctor.id}"
