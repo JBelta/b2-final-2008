@@ -10,15 +10,17 @@ describe "As a visitor" do
       DoctorPatient.create!(doctor_id: @doctor.id, patient_id: @patient_1.id)
       DoctorPatient.create!(doctor_id: @doctor.id, patient_id: @patient_2.id)
     end
-    it "When I click on the button to remove a patient, I am returned to the doctors show page and no longer see that patients name."
-    visit "/doctors/#{@doctor.id}"
+    it "When I click on the button to remove a patient, I am returned to the doctors show page and no longer see that patients name." do
+      visit "/doctors/#{@doctor.id}"
 
-    within "#patient-#{@patient_1.id}" do
-      expect(page).to have_button("Remove")
-      click_button "Remove"
+      within "#patient-#{@patient_1.id}" do
+        expect(page).to have_button("Remove")
+        click_button "Remove"
+      end
+
+      expect(current_path).to eq("/doctors/#{@doctor.id}")
+      expect(page).to_not have_css("#patient-#{@patient_1.id}")
+      expect(page).to_not have_content(@patient_1.name)
     end
-    expect(current_path).to eq("/doctors/#{@doctor.id}")
-    expect(page).to_not have_css("#patient-#{@patient_1.id}")
-    expect(page).to_not have_content(@patient_1.name)
   end
 end
